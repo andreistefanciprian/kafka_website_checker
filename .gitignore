@@ -48,3 +48,6 @@ dist/**
 *.nls.*.json
 *.i18n.json
 __*
+*.pem
+*.cert
+*.key

@@ -20,6 +20,9 @@ source venv/bin/activate
 # install pip packages
 pip install -r requirements.txt
 
+# define vars inside main.py
+# make service.key, service.cert and ca.pem available in current folder
+
 # run script
 python main.py
 
