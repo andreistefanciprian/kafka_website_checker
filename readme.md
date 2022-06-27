@@ -20,7 +20,12 @@ source venv/bin/activate
 # install pip packages
 pip install -r requirements.txt
 
-# define vars inside main.py
+# define website to test inside main.py
+url = 'https://api.github.com'
+
+# define kafka url in main.py
+service_uri = "kafka-testing.aivencloud.com:13036"
+
 # make service.key, service.cert and ca.pem available in current folder
 
 # run script
