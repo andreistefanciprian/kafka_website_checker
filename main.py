@@ -5,17 +5,13 @@ import os
 if __name__ == '__main__':
 
     # define variables
-    # url = 'https://api.githubgigi.com'
-    url = 'api.github.com'
-    # url = 'http://api.github.com'
-    # url = 'https://api.github.com'
-
+    url = 'https://api.github.com'
     service_uri = "kafka-testing-andreistefanciprian-f7f4.aivencloud.com:13036"
     ca_path = os.path.join(os.getcwd(), "ca.pem")
     cert_path = os.path.join(os.getcwd(), "service.cert")
     key_path = os.path.join(os.getcwd(), "service.key")
 
-    # check website
+    # check website availability
     check = WebsiteChecker(url)
 
     # publish data to kafka topic
