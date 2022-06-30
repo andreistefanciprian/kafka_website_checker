@@ -20,16 +20,23 @@ source venv/bin/activate
 # install pip packages
 pip install -r requirements.txt
 
-# define website to test inside main.py
-url = 'https://api.github.com'
+# to publish to kafka topic, make sure you have a service URI to connect to along with certificates (service.key, service.cert and ca.pem)
+# make kafka certificates available in current folder
+# create kafka topic, website_monitor ( kafka_topic = 'website_monitor' defined in main.py)
+# check website and publish collected data to kafka topic, website_monitor
 
-# define kafka url in main.py
-service_uri = "kafka-testing.aivencloud.com:13036"
+python main.py --service-uri kafka-testing-andreistefanciprian-f7f4.aivencloud.com:13036 \
+--ca-path ca.pem \
+--key-path service.key \
+--cert-path service.cert  \
+--website 'https://api.github.com'
 
-# make service.key, service.cert and ca.pem available in current folder
-
-# run script
-python main.py
+# get data from kafka topic
+python main.py --service-uri kafka-testing-andreistefanciprian-f7f4.aivencloud.com:13036 \
+--ca-path ca.pem \
+--key-path service.key \
+--cert-path service.cert \
+--consumer
 
 # deactivate python env after running the publisher/subscriber scripts
 deactivate
