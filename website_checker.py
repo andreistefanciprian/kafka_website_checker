@@ -9,6 +9,7 @@ import requests
 from http.client import HTTPConnection
 from urllib.parse import urlparse
 from requests.exceptions import HTTPError
+import re
 
 class WebsiteChecker:
     """
@@ -26,7 +27,7 @@ class WebsiteChecker:
         "URL": self.url,
         "HTTP_Status_Code": self.http_status_code,
         "HTTP_Response_Time": self.http_response_time,
-        "HTTP_Response_Body": self.http_body,
+        "Config": self.http_body,
         }
 
     def _site_is_online(self):
@@ -69,11 +70,19 @@ class WebsiteChecker:
 
     def _get_response_body(self):
         """
-        Returns HTTP Response Body.
+        Returns HTTP Response Body if:
+         - site is online
+         - status code is 2xx or 3xxx
+         - http body matches regex
         """
         result = None
-        if self._site_is_online:
-            result = self._response.text
+
+        if self._site_is_online and re.search("^[2,3]\d{2}$", str(self.http_status_code)):
+            http_body = str(self._response.text)
+            check_regex = re.findall("emojis_url", http_body)
+            if check_regex:
+                result = self._response.text
             return result
+
         else:
             return result
